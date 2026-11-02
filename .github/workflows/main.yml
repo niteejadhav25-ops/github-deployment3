@@ -1,0 +1,225 @@
+1. Create folder github-deployment → Open Folder in vs code 
+
+inside it  →   Create a file:
+
+index.html
+
+Write:
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>GitHub Deployment</title>
+
+</head>
+
+<body>
+
+    <h1>Application Deployed Successfully!</h1>
+
+    <p>This application is deployed automatically using GitHub Actions.</p>
+
+</body>
+
+</html>
+
+
+
+2. Open the index.html file in a browser( file explorer mai jakr go inside folder right click index.html open with google chrome).
+
+You should see:
+
+Application Deployed Successfully!
+
+
+
+2. ( ye hai hamare paas- login kro github mail se --open  github-deployment repo  )Go to GitHub and log in.
+
+Click:
+
++ → New repository
+
+Enter:
+
+Repository name:
+
+github-deployment
+
+Select:
+
+Public
+
+You can leave the other options as default.
+
+Click:
+
+Create repository
+
+3. open terminal in vs code
+
+run
+
+(intialize git)
+
+git init    then enter
+
+(add the files)
+
+git add .   then enter
+
+(commit the files)
+
+git commit -m "Initial commit"      then enter
+
+(connect local project to github)
+
+git config --global user.name "aaniyadalvi25-creator"    then enter
+
+git config --global user.email "aaniya.dalvi25@aiml.sce.edu.in"     then enter
+
+git add .        then enter
+
+git commit -m "Initial commit"     then enter
+
+git remote -v
+
+(push the applications to github)
+
+git branch -M main
+ git push -u origin main 
+4. Inside your project(github-deployment) folder, create these folders:
+
+.github(folder)
+
+Inside .github, create:
+
+workflows(folder)
+
+Inside workflows, create:
+
+deploy.yml(file)
+
+So the folder structure becomes:
+
+github-deployment
+
+│
+
+├── index.html
+
+│
+
+└── .github
+
+    └── workflows
+
+        └── deploy.yml
+
+4. Open:
+
+deploy.yml
+
+Write:
+
+name: Deploy Website
+
+ 
+
+on:
+
+  push:
+
+    branches:
+
+      - main
+
+ 
+
+permissions:
+
+  contents: read
+
+  pages: write
+
+  id-token: write
+
+ 
+
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+
+ 
+
+    steps:
+
+      - name: Checkout code
+
+        uses: actions/checkout@v4
+
+ 
+
+      - name: Setup Pages
+
+        uses: actions/configure-pages@v5
+
+ 
+
+      - name: Upload website
+
+        uses: actions/upload-pages-artifact@v3
+
+        with:
+
+          path: '.'
+
+ 
+
+      - name: Deploy to GitHub Pages
+
+
+        uses: actions/deploy-pages@v4
+
+5. Open the terminal.
+
+Run:
+
+git add .
+
+Then:
+
+git commit -m "Add deployment workflow"
+
+Then:
+
+git push
+
+Now GitHub automatically detects the workflow.
+
+6. In the GitHub repository, go to:
+
+Settings → Pages
+
+Under Build and deployment, select:
+
+Source: GitHub Actions
+
+GitHub Pages will use the workflow to deploy the website.
+
+After deployment, GitHub provides a website URL similar to:
+
+https://username.github.io/github-deployment/
+
+Open this URL in the browser.
+
+You should see:
+
+Application Deployed Successfully!
+
+
+
